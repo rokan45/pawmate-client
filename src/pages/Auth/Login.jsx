@@ -44,13 +44,13 @@ const Login = () => {
         <div className="text-center mb-8">
           <FaPaw className="text-5xl text-orange-500 mx-auto mb-3" />
           <h2 className="text-3xl font-bold">Welcome Back!</h2>
-          <p className="opacity-60 mt-1">Login to continue your pet adoption journey</p>
+          <p className="opacity-60 mt-1">Login to continue the journey</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Email</span></label>
-            <input name="email" type="email" placeholder="your@email.com" required className="input input-bordered" />
+            <input name="email" type="email" placeholder="Enter your email here" required className="input input-bordered" />
           </div>
           <div className="form-control relative">
             <label className="label"><span className="label-text font-medium">Password</span></label>
