@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 px-4">
-      <div className="card w-full max-w-md bg-base-100 shadow-2xl p-8">
+      <div className="card w-full max-w-md bg-base-100 shadow-2xl p-8 mt-7 mb-7">
         <div className="text-center mb-8">
           <FaPaw className="text-5xl text-orange-500 mx-auto mb-3" />
           <h2 className="text-3xl font-bold">Welcome Back!</h2>
