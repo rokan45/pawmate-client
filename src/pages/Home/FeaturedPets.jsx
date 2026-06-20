@@ -20,7 +20,7 @@ const FeaturedPets = () => {
           <FaPaw /> <span className="font-semibold uppercase tracking-widest text-sm">Meet Our Pets</span>
         </div>
         <h2 className="text-4xl font-bold">Featured Pets</h2>
-        <p className="mt-3 opacity-60 max-w-md mx-auto">These wonderful animals are looking for their forever homes. Could you be the one?</p>
+        <p className="mt-3 opacity-60 max-w-md mx-auto">These adorable creatures are searching for their permanent homes. Might you be the one?</p>
       </div>
 
       {isLoading ? (
@@ -28,7 +28,7 @@ const FeaturedPets = () => {
       ) : pets.length === 0 ? (
         <div className="text-center py-20 opacity-50">
           <FaPaw className="text-6xl mx-auto mb-4" />
-          <p className="text-xl">No pets available yet. Check back soon!</p>
+          <p className="text-xl">No pets available at this moment. Stay connected!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
