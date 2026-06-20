@@ -35,7 +35,7 @@ const PetCard = ({ pet }) => {
           <Link
             to={user ? `/pets/${_id}` : "/login"}
             className="btn btn-sm bg-orange-500 hover:bg-orange-600 text-white border-none rounded-full px-5">
-            View Details
+            Show Details
           </Link>
         </div>
       </div>
