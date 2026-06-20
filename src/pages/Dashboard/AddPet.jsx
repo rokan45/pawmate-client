@@ -63,7 +63,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Pet Name *</span></label>
-            <input name="name" defaultValue={def.name} type="text" placeholder="e.g., Buddy" required className="input input-bordered" />
+            <input name="name" defaultValue={def.name} type="text" placeholder="Buddy" required className="input input-bordered" />
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Species *</span></label>
@@ -73,7 +73,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Breed *</span></label>
-            <input name="breed" defaultValue={def.breed} type="text" placeholder="e.g., Golden Retriever" required className="input input-bordered" />
+            <input name="breed" defaultValue={def.breed} type="text" placeholder="Golden Retriever" required className="input input-bordered" />
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Age (years) *</span></label>
@@ -104,7 +104,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Location *</span></label>
-            <input name="location" defaultValue={def.location} type="text" placeholder="e.g., New York, NY" required className="input input-bordered" />
+            <input name="location" defaultValue={def.location} type="text" placeholder="Dhaka,Bangladesh" required className="input input-bordered" />
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Owner Email</span></label>

@@ -6,7 +6,7 @@ const NotFound = () => (
     <div className="space-y-6">
       <div className="text-9xl font-black text-orange-500 opacity-20">404</div>
       <FaPaw className="text-6xl text-orange-500 mx-auto -mt-8 animate-bounce" />
-      <h1 className="text-4xl font-bold">Oops! Page Not Found</h1>
+      <h1 className="text-4xl font-bold">Page Not Found</h1>
       <p className="text-lg opacity-60 max-w-md mx-auto">
         Looks like this page wandered off like a curious puppy. Don't worry, we'll help you find your way back!
       </p>
