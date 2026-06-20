@@ -127,7 +127,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
 
         <button type="submit" disabled={isPending}
           className="btn w-full bg-orange-500 hover:bg-orange-600 text-white border-none rounded-full text-lg">
-          {isPending ? <span className="loading loading-spinner loading-sm"></span> : (isEdit ? "Update Pet" : "Add Pet 🐾")}
+          {isPending ? <span className="loading loading-spinner loading-sm"></span> : (isEdit ? "Update Pet" : "Add Pet")}
         </button>
       </form>
     </div>
