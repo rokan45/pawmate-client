@@ -40,7 +40,7 @@ const AllPets = () => {
     <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold mb-3">All Pets</h1>
-        <p className="opacity-60">Find your perfect companion from our collection of adorable pets.</p>
+        <p className="opacity-60">Find your perfect companion from our adorable pets collection.</p>
       </div>
 
       {/* Search & Filter Bar */}
