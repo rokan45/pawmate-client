@@ -120,7 +120,7 @@ const PetDetails = () => {
           </div>
 
           <div className="bg-base-200 rounded-xl p-5">
-            <h3 className="font-bold text-lg mb-3 flex items-center gap-2"><FaPaw className="text-orange-500" /> About {pet.name}</h3>
+            <h3 className="font-bold text-lg mb-3 flex items-center gap-2"> About {pet.name}</h3>
             <p className="opacity-75 leading-relaxed">{pet.description}</p>
           </div>
 
@@ -137,7 +137,7 @@ const PetDetails = () => {
             <div className="flex gap-3">
               <button onClick={() => setShowForm(!showForm)}
                 className="btn flex-1 bg-orange-500 hover:bg-orange-600 text-white border-none rounded-full text-lg">
-                {showForm ? "Cancel" : "Adopt Now 🐾"}
+                {showForm ? "Cancel" : "Adopt Now"}
               </button>
               <button onClick={() => addToWishlist()}
                 className="btn btn-outline border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white hover:border-orange-500 rounded-full">
