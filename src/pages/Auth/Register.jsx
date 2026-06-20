@@ -62,11 +62,11 @@ const Register = () => {
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Email</span></label>
-            <input name="email" type="email" placeholder="your@email.com" required className="input input-bordered" />
+            <input name="email" type="email" placeholder="Enter your email addresses" required className="input input-bordered" />
           </div>
           <div className="form-control">
             <label className="label"><span className="label-text font-medium">Photo URL</span></label>
-            <input name="photoURL" type="url" placeholder="https://example.com/photo.jpg" className="input input-bordered" />
+            <input name="photoURL" type="url" placeholder="Paste a profile photo URL here" className="input input-bordered" />
           </div>
           <div className="form-control relative">
             <label className="label"><span className="label-text font-medium">Password</span></label>
