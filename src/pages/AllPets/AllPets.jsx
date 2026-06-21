@@ -80,7 +80,7 @@ const AllPets = () => {
       ) : pets.length === 0 ? (
         <div className="text-center py-20 opacity-50">
           <p className="text-5xl mb-4">🐾</p>
-          <p className="text-xl font-semibold">No pets found</p>
+          <p className="text-2xl font-semibold">No pets found</p>
           <p className="text-sm mt-2">Try adjusting your search or filters</p>
         </div>
       ) : (
