@@ -14,7 +14,7 @@ const Footer = () => (
       <div>
         <span className="footer-title">Contact</span>
         <div className="flex items-center gap-2 mt-2"><FaEnvelope /> <span>adopt@pawmate.com</span></div>
-        <div className="flex items-center gap-2 mt-2"><FaPhone /> <span>01700000000</span></div>
+        <div className="flex items-center gap-2 mt-2"><FaPhone /> <span>017-11100000</span></div>
       </div>
       <div>
         <span className="footer-title">Follow Us</span>
