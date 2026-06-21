@@ -15,7 +15,7 @@ const Banner = () => (
           <FaPaw /> 500+ Pets Waiting for a Home
         </div>
         <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
-          Find Your <span className="text-orange-500">Perfect</span> Furry Companion
+          Find Your <span className="text-orange-500">Perfect</span> <span className="text-orange-500">Furry</span> Companion
         </h1>
         <p className="text-lg opacity-70 max-w-md">
           Every pet deserves a loving home. Browse our shelter pets and give them the forever home they deserve.
