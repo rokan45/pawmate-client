@@ -19,13 +19,14 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li><NavLink to="/" end className={({isActive}) => isActive ? "text-orange-500 font-semibold" : ""}>Home</NavLink></li>
-      <li><NavLink to="/all-pets" className={({isActive}) => isActive ? "text-orange-500 font-bold" : ""}>All Pets</NavLink></li>
+      <li><NavLink to="/" end className={({ isActive }) => isActive ? "text-orange-500 font-semibold" : ""}>Home</NavLink></li>
+      <li><NavLink to="/all-pets" className={({ isActive }) => isActive ? "text-orange-500 font-bold" : ""}>All Pets</NavLink></li>
+      <li><NavLink to="/pet-matcher" className={({ isActive }) => isActive ? "text-orange-500 font-semibold" : ""}>Pet Matcher</NavLink></li>F
       {user && (
-        <li><NavLink to="/dashboard/my-requests" className={({isActive}) => isActive ? "text-orange-500 font-bold" : ""}>My Requests</NavLink></li>
+        <li><NavLink to="/dashboard/my-requests" className={({ isActive }) => isActive ? "text-orange-500 font-bold" : ""}>My Requests</NavLink></li>
       )}
       {user && (
-        <li><NavLink to="/dashboard/add-pet" className={({isActive}) => isActive ? "text-orange-500 font-bold" : ""}>Add Pet</NavLink></li>
+        <li><NavLink to="/dashboard/add-pet" className={({ isActive }) => isActive ? "text-orange-500 font-bold" : ""}>Add Pet</NavLink></li>
       )}
     </>
   );

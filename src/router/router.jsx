@@ -12,6 +12,7 @@ import MyListings from "../pages/Dashboard/MyListings";
 import AddPet from "../pages/Dashboard/AddPet";
 import MyRequests from "../pages/Dashboard/MyRequests";
 import Wishlist from "../pages/Dashboard/Wishlist";
+import PetMatcher from "../pages/PetMatcher/PetMatcher";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: "all-pets", element: <AllPets /> },
       { path: "pets/:id", element: <PrivateRoute><PetDetails /></PrivateRoute> },
       { path: "login", element: <Login /> },
+      { path: "pet-matcher", element: <PetMatcher /> },
       { path: "register", element: <Register /> },
     ],
   },

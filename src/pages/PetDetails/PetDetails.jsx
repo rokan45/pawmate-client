@@ -98,7 +98,7 @@ const PetDetails = () => {
               { icon: <FaBirthdayCake />, label: "Age", value: `${pet.age} year${pet.age !== 1 ? "s" : ""}` },
               { icon: <FaVenusMars />, label: "Gender", value: pet.gender },
               { icon: <FaMapMarkerAlt />, label: "Location", value: pet.location },
-              { icon: <TbCurrencyTaka/>, label: "Adoption Fee", value: pet.adoptionFee > 0 ? `${pet.adoptionFee}` : "Free" },
+              { icon: <TbCurrencyTaka/>, label: "Adoption Fee", value: pet.adoptionFee > 0 ? `${pet.adoptionFee}৳` : "Free" },
               { icon: <FaMedkit />, label: "Health", value: pet.healthStatus },
               { icon: <FaSyringe />, label: "Vaccinated", value: pet.vaccinationStatus },
               { icon: <FaPhone/>, label: "Contact", value: pet.contactNumber },
