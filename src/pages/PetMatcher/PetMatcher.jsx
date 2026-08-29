@@ -147,14 +147,14 @@ const PetMatcher = () => {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4">
         <div className="max-w-lg w-full text-center space-y-8">
           <div>
-            <div className="text-8xl mb-4">🐾</div>
+            {/* <div className="text-8xl mb-4">🐾</div> */}
             <h1 className="text-4xl font-extrabold mb-3">Pet Matcher Quiz</h1>
             <p className="text-lg opacity-70 leading-relaxed">
               Not sure which pet is right for you? Answer 5 quick questions and we'll find your perfect match from our available pets!
             </p>
           </div>
           <div className="grid grid-cols-3 gap-4 text-center">
-            {[["5", "Questions"], ["~2", "Minutes"], ["100%", "Free"]].map(([num, label]) => (
+            {[["5", "Questions"], ["2", "Minutes"], ["100%", "Free"]].map(([num, label]) => (
               <div key={label} className="bg-base-100 rounded-xl p-4 shadow">
                 <p className="text-2xl font-bold text-orange-500">{num}</p>
                 <p className="text-sm opacity-60">{label}</p>
@@ -178,7 +178,7 @@ const PetMatcher = () => {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 px-4 py-12">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <div className="text-6xl mb-4">🎉</div>
+            {/* <div className="text-6xl mb-4">🎉</div> */}
             <h2 className="text-4xl font-bold mb-3">Your Perfect Matches!</h2>
             <p className="opacity-60 text-lg">
               Based on your lifestyle, here are the best pets for you:
