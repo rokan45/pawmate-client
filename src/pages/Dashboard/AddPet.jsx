@@ -46,6 +46,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
       adoptionFee: Number(form.adoptionFee.value),
       description: form.description.value,
       ownerEmail: user.email,
+      contactNumber: form.contactNumber.value,
     };
     mutate(data);
   };
@@ -110,6 +111,11 @@ const AddPet = ({ existingPet, onSuccess }) => {
             <label className="label"><span className="label-text font-medium">Owner Email</span></label>
             <input type="email" value={user.email} readOnly className="input input-bordered bg-base-300" />
           </div>
+        </div>
+        
+        <div className="form-control">
+          <label className="label"><span className="label-text font-medium">Contact Number *</span></label>
+          <input name="contactNumber" defaultValue={def.contactNumber} type="tel" placeholder="01XXXXXXXXX" required className="input input-bordered" />
         </div>
 
         <div className="form-control">

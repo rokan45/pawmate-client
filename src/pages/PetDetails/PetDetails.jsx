@@ -4,7 +4,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosSecure from "../../utils/axiosSecure";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-import { FaMapMarkerAlt, FaDollarSign, FaHeart, FaSyringe, FaMedkit, FaVenusMars, FaBirthdayCake, FaPaw } from "react-icons/fa";
+import { TbCurrencyTaka } from "react-icons/tb";
+import { FaMapMarkerAlt, FaHeart, FaSyringe, FaMedkit, FaVenusMars, FaBirthdayCake, FaPaw } from "react-icons/fa";
 
 const PetDetails = () => {
   const { id } = useParams();
@@ -97,9 +98,10 @@ const PetDetails = () => {
               { icon: <FaBirthdayCake />, label: "Age", value: `${pet.age} year${pet.age !== 1 ? "s" : ""}` },
               { icon: <FaVenusMars />, label: "Gender", value: pet.gender },
               { icon: <FaMapMarkerAlt />, label: "Location", value: pet.location },
-              { icon: <FaDollarSign />, label: "Adoption Fee", value: pet.adoptionFee > 0 ? `$${pet.adoptionFee}` : "Free" },
+              { icon: <TbCurrencyTaka/>, label: "Adoption Fee", value: pet.adoptionFee > 0 ? `$${pet.adoptionFee}` : "Free" },
               { icon: <FaMedkit />, label: "Health", value: pet.healthStatus },
               { icon: <FaSyringe />, label: "Vaccinated", value: pet.vaccinationStatus },
+              { icon: <FaPhone/>, label: "Contact", value: pet.contactNumber },
             ].map(({ icon, label, value }) => (
               <div key={label} className="bg-base-200 rounded-xl p-4 flex items-center gap-3">
                 <span className="text-orange-500 text-lg">{icon}</span>
