@@ -5,7 +5,7 @@ import axiosSecure from "../../utils/axiosSecure";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { FaMapMarkerAlt, FaHeart, FaSyringe, FaMedkit, FaVenusMars, FaBirthdayCake, FaPaw } from "react-icons/fa";
+import { FaMapMarkerAlt, FaHeart, FaSyringe, FaMedkit, FaVenusMars, FaBirthdayCake, FaPaw,FaPhone} from "react-icons/fa";
 
 const PetDetails = () => {
   const { id } = useParams();
