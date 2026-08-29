@@ -87,7 +87,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
             </select>
           </div>
           <div className="form-control">
-            <label className="label"><span className="label-text font-medium">Adoption Fee ($) *</span></label>
+            <label className="label"><span className="label-text font-medium">Adoption Fee (৳) *</span></label>
             <input name="adoptionFee" defaultValue={def.adoptionFee || 0} type="number" min="0" required className="input input-bordered" />
           </div>
           <div className="form-control">

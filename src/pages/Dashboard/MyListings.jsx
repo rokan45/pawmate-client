@@ -138,7 +138,7 @@ const MyListings = () => {
                     {pet.status}
                   </span>
                 </div>
-                <p className="font-semibold text-orange-500">${pet.adoptionFee || "Free"}</p>
+                <p className="font-semibold text-orange-500">৳{pet.adoptionFee || "Free"}</p>
                 <div className="flex gap-2 mt-2 flex-wrap">
                   <button onClick={() => setRequestsModal(pet)}
                     className="btn btn-xs btn-outline border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white hover:border-blue-500 gap-1">
