@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { FaMapMarkerAlt, FaDollarSign, FaBirthdayCake } from "react-icons/fa";
+import { FaMapMarkerAlt,FaBirthdayCake } from "react-icons/fa";
+import { TbCurrencyTaka } from "react-icons/tb";
 import { useAuth } from "../../context/AuthContext";
 
 const PetCard = ({ pet }) => {
@@ -30,7 +31,7 @@ const PetCard = ({ pet }) => {
         </div>
         <div className="flex items-center justify-between mt-3">
           <span className="flex items-center gap-1 font-bold text-orange-500 text-lg">
-            <FaDollarSign />{adoptionFee > 0 ? adoptionFee : "Free"}
+            <TbCurrencyTaka/>{adoptionFee > 0 ? adoptionFee : "Free"}
           </span>
           <Link
             to={user ? `/pets/${_id}` : "/login"}
