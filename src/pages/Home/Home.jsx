@@ -8,7 +8,7 @@ import NewsletterSection from "./NewsletterSection";
 const Home = () => (
   <div>
     <Banner />
-    <FeaturedPets />
+    {/* <FeaturedPets /> */}
     <WhyAdopt />
     <SuccessStories />
     <PetCareTips />
