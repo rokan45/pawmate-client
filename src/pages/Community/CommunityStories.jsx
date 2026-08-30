@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import {
   FaHeart,
-  FaPaw,
   FaTrash,
   FaPlus,
   FaTimes,
@@ -16,20 +15,154 @@ import {
 
 const PET_TYPES = ["Dog", "Cat", "Bird", "Rabbit", "Fish", "Hamster", "Other"];
 
+// Star Rating Component for reading/voting
+const StarRating = ({ storyId, currentRating, ratingCount, authorEmail, raters = [] }) => {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const [hovered, setHovered] = useState(0);
+
+  const alreadyRated = user && raters.includes(user.email);
+  const isOwner = user?.email === authorEmail;
+  const canRate = user && !isOwner && !alreadyRated;
+
+  const { mutate: submitRating } = useMutation({
+    mutationFn: async (rating) => {
+      const res = await axiosSecure.patch(`/stories/${storyId}/rate`, { rating });
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success("Thanks for rating!");
+      queryClient.invalidateQueries(["communityStories"]);
+    },
+    onError: (err) => toast.error(err.response?.data?.message || "Rating failed"),
+  });
+
+  return (
+    <div className="flex items-center gap-2 mt-3">
+      <div className="flex gap-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <button
+            key={star}
+            type="button"
+            disabled={!canRate}
+            onClick={() => canRate && submitRating(star)}
+            onMouseEnter={() => canRate && setHovered(star)}
+            onMouseLeave={() => setHovered(0)}
+            className={`text-lg transition-all ${
+              canRate ? "cursor-pointer hover:scale-110" : "cursor-default"
+            } ${
+              star <= (hovered || currentRating || 0)
+                ? "text-yellow-400"
+                : "text-gray-300"
+            }`}
+          >
+            <FaStar />
+          </button>
+        ))}
+      </div>
+      <span className="text-xs opacity-50">
+        {currentRating
+          ? `${Number(currentRating).toFixed(1)} (${ratingCount || 0} ${ratingCount === 1 ? "rating" : "ratings"})`
+          : "No ratings yet"}
+      </span>
+      {!user && <span className="text-xs opacity-40">Login to rate</span>}
+      {isOwner && <span className="text-xs opacity-40">Your story</span>}
+      {alreadyRated && <span className="text-xs text-green-500">✓ Rated</span>}
+    </div>
+  );
+};
+
+// Read More Modal
+const StoryModal = ({ story, onClose }) => {
+  const { user } = useAuth();
+
+  if (!story) return null;
+
+  return (
+    <div className="modal modal-open">
+      <div className="modal-box max-w-2xl max-h-[80vh] overflow-y-auto">
+        {/* Image */}
+        {story.image && (
+          <figure className="h-56 overflow-hidden rounded-xl mb-5 -mx-6 -mt-6">
+            <img
+              src={story.image}
+              alt={story.petName}
+              className="w-full h-full object-cover"
+              onError={(e) => { e.target.style.display = "none"; }}
+            />
+          </figure>
+        )}
+
+        {/* Author */}
+        <div className="flex items-center gap-3 mb-4">
+          <img
+            src={story.authorPhoto}
+            alt={story.authorName}
+            className="w-10 h-10 rounded-full object-cover border-2 border-orange-300"
+            onError={(e) => { e.target.src = "https://i.ibb.co/dcHJxbX/user.png"; }}
+          />
+          <div>
+            <p className="font-semibold text-sm">{story.authorName}</p>
+            <p className="text-xs opacity-50">
+              {new Date(story.createdAt).toLocaleDateString("en-US", {
+                year: "numeric", month: "long", day: "numeric",
+              })}
+            </p>
+          </div>
+          <span className="badge badge-warning badge-sm ml-auto">{story.petType}</span>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-2xl font-bold mb-2">{story.title}</h3>
+        {story.petName && (
+          <p className="text-sm text-orange-500 font-medium mb-4">🐾 {story.petName}</p>
+        )}
+
+        {/* Full Story */}
+        <p className="opacity-75 leading-relaxed text-sm whitespace-pre-wrap">
+          {story.story}
+        </p>
+
+        {/* Rating in modal */}
+        <div className="mt-6 pt-4 border-t border-base-300">
+          <p className="text-sm font-medium mb-2 opacity-70">
+            {user && user.email !== story.authorEmail && !(story.raters || []).includes(user.email)
+              ? "Rate this story:"
+              : "Community Rating:"}
+          </p>
+          <StarRating
+            storyId={story._id}
+            currentRating={story.rating}
+            ratingCount={story.ratingCount}
+            authorEmail={story.authorEmail}
+            raters={story.raters || []}
+          />
+        </div>
+
+        <div className="modal-action">
+          <button onClick={onClose} className="btn btn-ghost rounded-full">
+            Close
+          </button>
+        </div>
+      </div>
+      <div className="modal-backdrop" onClick={onClose}></div>
+    </div>
+  );
+};
+
 const CommunityStories = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
+  const [selectedStory, setSelectedStory] = useState(null);
   const [form, setForm] = useState({
     title: "",
     petName: "",
     petType: "Dog",
     story: "",
     image: "",
-    rating: 5,
   });
 
-  // Fetch all stories
   const { data: stories = [], isLoading } = useQuery({
     queryKey: ["communityStories"],
     queryFn: async () => {
@@ -38,7 +171,6 @@ const CommunityStories = () => {
     },
   });
 
-  // Post story
   const { mutate: postStory, isPending } = useMutation({
     mutationFn: async (data) => {
       const res = await axiosSecure.post("/stories", data);
@@ -47,13 +179,12 @@ const CommunityStories = () => {
     onSuccess: () => {
       toast.success("Story posted successfully!");
       setShowForm(false);
-      setForm({ title: "", petName: "", petType: "Dog", story: "", image: "", rating: 5 });
+      setForm({ title: "", petName: "", petType: "Dog", story: "", image: "" });
       queryClient.invalidateQueries(["communityStories"]);
     },
     onError: (err) => toast.error(err.response?.data?.message || "Failed to post"),
   });
 
-  // Delete story
   const { mutate: deleteStory } = useMutation({
     mutationFn: async (id) => {
       const res = await axiosSecure.delete(`/stories/${id}`);
@@ -68,13 +199,17 @@ const CommunityStories = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.title || !form.petName || !form.story)
+    if (!form.title || !form.story)
       return toast.error("Please fill all required fields");
     postStory({
       ...form,
       authorName: user.displayName,
       authorEmail: user.email,
       authorPhoto: user.photoURL || "https://i.ibb.co/dcHJxbX/user.png",
+      rating: 0,
+      ratingCount: 0,
+      totalRatings: 0,
+      raters: [],
     });
   };
 
@@ -96,7 +231,6 @@ const CommunityStories = () => {
     <div className="min-h-screen bg-base-100">
       {/* Hero */}
       <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white py-16 px-6 text-center">
-        {/* <FaHeart className="text-5xl mx-auto mb-4 opacity-80" /> */}
         <h1 className="text-4xl font-extrabold mb-3">Community Stories</h1>
         <p className="text-lg opacity-90 max-w-xl mx-auto">
           Real stories from real families who found their perfect companions
@@ -123,8 +257,8 @@ const CommunityStories = () => {
         {/* Post Form */}
         {showForm && user && (
           <div className="bg-base-200 rounded-2xl p-8 mb-12 shadow-lg">
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-               Share Your Adoption Story
+            <h3 className="text-2xl font-bold mb-6">
+              Share Your Adoption Story
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -193,27 +327,6 @@ const CommunityStories = () => {
                 />
               </div>
 
-              {/* Rating
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-medium">Your Rating</span>
-                </label>
-                <div className="flex gap-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setForm({ ...form, rating: star })}
-                      className={`text-2xl transition-all ${
-                        star <= form.rating ? "text-yellow-400" : "text-gray-300"
-                      }`}
-                    >
-                      ★
-                    </button>
-                  ))}
-                </div>
-              </div> */}
-
               <button
                 type="submit"
                 disabled={isPending}
@@ -221,9 +334,7 @@ const CommunityStories = () => {
               >
                 {isPending ? (
                   <span className="loading loading-spinner loading-sm"></span>
-                ) : (
-                  "Post Story"
-                )}
+                ) : "Post Story"}
               </button>
             </form>
           </div>
@@ -242,7 +353,9 @@ const CommunityStories = () => {
           </div>
         ) : (
           <>
-            <p className="mb-6 opacity-60 text-sm">{stories.length} stor{stories.length !== 1 ? "ies" : "y"} shared</p>
+            <p className="mb-6 opacity-60 text-sm">
+              {stories.length} stor{stories.length !== 1 ? "ies" : "y"} shared
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {stories.map((story) => (
                 <div
@@ -275,7 +388,7 @@ const CommunityStories = () => {
                           <p className="font-semibold text-sm">{story.authorName}</p>
                           <p className="text-xs opacity-50">
                             {new Date(story.createdAt).toLocaleDateString("en-US", {
-                              year: "numeric", month: "short", day: "numeric"
+                              year: "numeric", month: "short", day: "numeric",
                             })}
                           </p>
                         </div>
@@ -295,26 +408,32 @@ const CommunityStories = () => {
 
                     {/* Title */}
                     <h3 className="text-lg font-bold mb-1">{story.title}</h3>
-                    {/* <p className="text-sm text-orange-500 font-medium mb-2">
-                      🐾 {story.petName}
-                    </p> */}
 
-                    {/* Story Text */}
+                    {/* Story Preview */}
                     <p className="text-sm opacity-70 leading-relaxed italic">
-                      "{story.story.length > 180
-                        ? story.story.slice(0, 180) + "..."
+                      "{story.story.length > 120
+                        ? story.story.slice(0, 120) + "..."
                         : story.story}"
                     </p>
 
-                    {/* Rating */}
-                    {/* <div className="flex gap-1 mt-3">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <FaStar
-                          key={star}
-                          className={star <= story.rating ? "text-yellow-400" : "text-gray-200"}
-                        />
-                      ))}
-                    </div> */}
+                    {/* Read More Button */}
+                    {story.story.length > 120 && (
+                      <button
+                        onClick={() => setSelectedStory(story)}
+                        className="text-orange-500 hover:text-orange-600 text-sm font-semibold mt-1 text-left hover:underline transition-all"
+                      >
+                        Read more →
+                      </button>
+                    )}
+
+                    {/* Community Rating */}
+                    <StarRating
+                      storyId={story._id}
+                      currentRating={story.rating}
+                      ratingCount={story.ratingCount}
+                      authorEmail={story.authorEmail}
+                      raters={story.raters || []}
+                    />
                   </div>
                 </div>
               ))}
@@ -322,6 +441,14 @@ const CommunityStories = () => {
           </>
         )}
       </div>
+
+      {/* Read More Modal */}
+      {selectedStory && (
+        <StoryModal
+          story={selectedStory}
+          onClose={() => setSelectedStory(null)}
+        />
+      )}
     </div>
   );
 };
