@@ -59,36 +59,81 @@ const questions = [
 
 const calculateScore = (pet, answers) => {
   let score = 0;
-  const preferredSpecies = new Set();
-  let ageMin = 0;
-  let ageMax = 20;
 
-  answers.forEach((answer, i) => {
-    const question = questions[i];
-    const option = question.options.find((o) => o.value === answer);
+  // Count how many answers support each species
+  const speciesCount = {};
+
+  answers.forEach((answer, index) => {
+    const question = questions[index];
+
+    const option = question.options.find(
+      (option) => option.value === answer
+    );
+
     if (!option) return;
-    option.species.forEach((s) => preferredSpecies.add(s));
-    if (option.ageMin !== undefined) ageMin = Math.max(ageMin, option.ageMin);
-    if (option.ageMax !== undefined) ageMax = Math.min(ageMax, option.ageMax);
+
+    option.species.forEach((species) => {
+      speciesCount[species] = (speciesCount[species] || 0) + 1;
+    });
   });
 
-  // Species match
-  if (preferredSpecies.has(pet.species)) score += 40;
+  // Species match: maximum 40 points
+  const totalQuestions = answers.length;
+  const speciesMatches = speciesCount[pet.species] || 0;
+
+  score += (speciesMatches / totalQuestions) * 40;
+
+  // Find preferred age range
+  let minAge = 0;
+  let maxAge = 20;
+
+  answers.forEach((answer, index) => {
+    const question = questions[index];
+
+    const option = question.options.find(
+      (option) => option.value === answer
+    );
+
+    if (!option) return;
+
+    if (option.ageMin !== undefined) {
+      minAge = Math.max(minAge, option.ageMin);
+    }
+
+    if (option.ageMax !== undefined) {
+      maxAge = Math.min(maxAge, option.ageMax);
+    }
+  });
 
   // Age match
   const petAge = Number(pet.age);
-  if (petAge >= ageMin && petAge <= ageMax) score += 30;
-  else if (petAge >= ageMin - 1 && petAge <= ageMax + 1) score += 15;
 
-  // Status must be available
-  if (pet.status !== "available") score -= 100;
+  if (petAge >= minAge && petAge <= maxAge) {
+    score += 30;
+  } else if (
+    petAge >= minAge - 1 &&
+    petAge <= maxAge + 1
+  ) {
+    score += 15;
+  }
+
+  // Available pet gets no penalty
+  // Unavailable pet gets a large penalty
+  if (pet.status !== "available") {
+    score -= 100;
+  }
 
   // Health bonus
-  if (pet.healthStatus === "Excellent") score += 15;
-  else if (pet.healthStatus === "Good") score += 10;
+  if (pet.healthStatus === "Excellent") {
+    score += 15;
+  } else if (pet.healthStatus === "Good") {
+    score += 10;
+  }
 
   // Vaccination bonus
-  if (pet.vaccinationStatus === "Vaccinated") score += 15;
+  if (pet.vaccinationStatus === "Vaccinated") {
+    score += 15;
+  }
 
   return score;
 };
@@ -308,9 +353,8 @@ const PetMatcher = () => {
           {questions.map((_, i) => (
             <div
               key={i}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
-                i < step ? "bg-orange-500" : "bg-base-300"
-              }`}
+              className={`w-2.5 h-2.5 rounded-full transition-all ${i < step ? "bg-orange-500" : "bg-base-300"
+                }`}
             />
           ))}
         </div>
