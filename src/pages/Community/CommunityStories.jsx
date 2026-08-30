@@ -96,7 +96,7 @@ const CommunityStories = () => {
     <div className="min-h-screen bg-base-100">
       {/* Hero */}
       <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white py-16 px-6 text-center">
-        <FaHeart className="text-5xl mx-auto mb-4 opacity-80" />
+        {/* <FaHeart className="text-5xl mx-auto mb-4 opacity-80" /> */}
         <h1 className="text-4xl font-extrabold mb-3">Community Stories</h1>
         <p className="text-lg opacity-90 max-w-xl mx-auto">
           Real stories from real families who found their perfect companions
@@ -124,7 +124,7 @@ const CommunityStories = () => {
         {showForm && user && (
           <div className="bg-base-200 rounded-2xl p-8 mb-12 shadow-lg">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <FaPaw className="text-orange-500" /> Share Your Adoption Story
+               Share Your Adoption Story
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -136,7 +136,7 @@ const CommunityStories = () => {
                     type="text"
                     value={form.title}
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
-                    placeholder="e.g., How Max Changed Our Lives"
+                    placeholder="Give your story a title"
                     required
                     className="input input-bordered"
                   />
@@ -149,7 +149,7 @@ const CommunityStories = () => {
                     type="text"
                     value={form.petName}
                     onChange={(e) => setForm({ ...form, petName: e.target.value })}
-                    placeholder="e.g., Buddy"
+                    placeholder="Enter your pet name"
                     required
                     className="input input-bordered"
                   />
@@ -174,7 +174,7 @@ const CommunityStories = () => {
                     type="url"
                     value={form.image}
                     onChange={(e) => setForm({ ...form, image: e.target.value })}
-                    placeholder="https://your-photo-url.com"
+                    placeholder="Paste a photo url here"
                     className="input input-bordered"
                   />
                 </div>
@@ -188,13 +188,13 @@ const CommunityStories = () => {
                   value={form.story}
                   onChange={(e) => setForm({ ...form, story: e.target.value })}
                   rows={4}
-                  placeholder="Tell us about your adoption experience, how your pet has changed your life..."
+                  placeholder="Tell us about your adoption experience, anything you like to share"
                   required
                   className="textarea textarea-bordered resize-none"
                 />
               </div>
 
-              {/* Rating */}
+              {/* Rating
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium">Your Rating</span>
@@ -213,7 +213,7 @@ const CommunityStories = () => {
                     </button>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               <button
                 type="submit"
@@ -223,7 +223,7 @@ const CommunityStories = () => {
                 {isPending ? (
                   <span className="loading loading-spinner loading-sm"></span>
                 ) : (
-                  "Post Story 🐾"
+                  "Post Story"
                 )}
               </button>
             </form>
@@ -232,7 +232,7 @@ const CommunityStories = () => {
 
         {/* Stories Grid */}
         {isLoading ? (
-          <div className="flex justify-center py-20">
+          <div className="flex justify-center py-10">
             <span className="loading loading-spinner loading-lg text-orange-500"></span>
           </div>
         ) : stories.length === 0 ? (
