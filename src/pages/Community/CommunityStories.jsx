@@ -143,14 +143,13 @@ const CommunityStories = () => {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text font-medium">Pet's Name *</span>
+                    <span className="label-text font-medium">Pet's Name (optional)</span>
                   </label>
                   <input
                     type="text"
                     value={form.petName}
                     onChange={(e) => setForm({ ...form, petName: e.target.value })}
                     placeholder="Enter your pet name"
-                    required
                     className="input input-bordered"
                   />
                 </div>
