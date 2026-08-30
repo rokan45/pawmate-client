@@ -14,6 +14,7 @@ import MyRequests from "../pages/Dashboard/MyRequests";
 import Wishlist from "../pages/Dashboard/Wishlist";
 import PetMatcher from "../pages/PetMatcher/PetMatcher";
 import CommunityStories from "../pages/Community/CommunityStories";
+import Subscription from "../pages/Subscription/Subscription";
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "all-pets", element: <AllPets /> },
       { path: "pets/:id", element: <PrivateRoute><PetDetails /></PrivateRoute> },
       { path: "login", element: <Login /> },
+      { path: "subscription", element: <Subscription /> },
       { path: "pet-matcher", element: <PetMatcher /> },
       { path: "register", element: <Register /> },
       { path: "community", element: <CommunityStories /> },
