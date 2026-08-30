@@ -296,9 +296,9 @@ const CommunityStories = () => {
 
                     {/* Title */}
                     <h3 className="text-lg font-bold mb-1">{story.title}</h3>
-                    <p className="text-sm text-orange-500 font-medium mb-2">
+                    {/* <p className="text-sm text-orange-500 font-medium mb-2">
                       🐾 {story.petName}
-                    </p>
+                    </p> */}
 
                     {/* Story Text */}
                     <p className="text-sm opacity-70 leading-relaxed italic">
@@ -308,14 +308,14 @@ const CommunityStories = () => {
                     </p>
 
                     {/* Rating */}
-                    <div className="flex gap-1 mt-3">
+                    {/* <div className="flex gap-1 mt-3">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <FaStar
                           key={star}
                           className={star <= story.rating ? "text-yellow-400" : "text-gray-200"}
                         />
                       ))}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
