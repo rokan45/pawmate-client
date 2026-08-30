@@ -6,6 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { FaMapMarkerAlt, FaHeart, FaSyringe, FaMedkit, FaVenusMars, FaBirthdayCake, FaPaw,FaPhone} from "react-icons/fa";
+import { BiLogoGmail } from "react-icons/bi";
 
 const PetDetails = () => {
   const { id } = useParams();
@@ -102,6 +103,8 @@ const PetDetails = () => {
               { icon: <FaMedkit />, label: "Health", value: pet.healthStatus },
               { icon: <FaSyringe />, label: "Vaccinated", value: pet.vaccinationStatus },
               { icon: <FaPhone/>, label: "Contact", value: pet.contactNumber },
+              { icon: <BiLogoGmail />, label: "owner-mail", value: pet.ownerEmail },
+
             ].map(({ icon, label, value }) => (
               <div key={label} className="bg-base-200 rounded-xl p-4 flex items-center gap-3">
                 <span className="text-orange-500 text-lg">{icon}</span>
