@@ -5,6 +5,8 @@ import axiosSecure from "../../utils/axiosSecure";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import SubscriptionModal from "../../components/shared/SubscriptionModal";
 
 const SPECIES = ["Dog", "Cat", "Bird", "Rabbit", "Fish", "Hamster", "Other"];
 
@@ -30,9 +32,40 @@ const AddPet = ({ existingPet, onSuccess }) => {
     onError: (err) => toast.error(err.response?.data?.message || "Operation failed"),
   });
 
+  const [showSubModal, setShowSubModal] = useState(false);
+
+  const { data: countData } = useQuery({
+    queryKey: ["myPetCount", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/my-pets/count");
+      return res.data;
+    },
+    enabled: !!user?.email && !isEdit,
+  });
+
+  const { data: subData } = useQuery({
+    queryKey: ["subscriptionStatus"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/subscription");
+      return res.data;
+    },
+    enabled: !!user?.email && !isEdit,
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+
+    // Only check on new pet (not edit)
+    if (!isEdit) {
+      const petCount = countData?.count || 0;
+      const isSubscribed = subData?.subscribed;
+      if (petCount >= 2 && !isSubscribed) {
+        setShowSubModal(true);
+        return;
+      }
+    }
+
     const data = {
       name: form.name.value,
       species: form.species.value,
@@ -112,7 +145,7 @@ const AddPet = ({ existingPet, onSuccess }) => {
             <input type="email" value={user.email} readOnly className="input input-bordered bg-base-300" />
           </div>
         </div>
-        
+
         <div className="form-control">
           <label className="label"><span className="label-text font-medium">Contact Number *</span></label>
           <input name="contactNumber" defaultValue={def.contactNumber} type="tel" placeholder="01XXXXXXXXX" required className="input input-bordered" />
@@ -136,6 +169,11 @@ const AddPet = ({ existingPet, onSuccess }) => {
           {isPending ? <span className="loading loading-spinner loading-sm"></span> : (isEdit ? "Update Pet" : "Add Pet")}
         </button>
       </form>
+
+      {showSubModal && (
+        <SubscriptionModal onClose={() => setShowSubModal(false)} />
+      )}
+
     </div>
   );
 };
