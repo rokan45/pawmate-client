@@ -230,11 +230,10 @@ const CommunityStories = () => {
   return (
     <div className="min-h-screen bg-base-100">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white py-16 px-6 text-center">
+      <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white py-16 px-4 text-center">
         <h1 className="text-4xl font-extrabold mb-3">Community Stories</h1>
         <p className="text-lg opacity-90 max-w-xl mx-auto">
-          Real stories from real families who found their perfect companions
-          through PawMate. Share your story and inspire others!
+          Share your story and inspire others!
         </p>
         {user ? (
           <button
@@ -342,7 +341,7 @@ const CommunityStories = () => {
 
         {/* Stories Grid */}
         {isLoading ? (
-          <div className="flex justify-center py-10">
+          <div className="flex justify-center py-5">
             <span className="loading loading-spinner loading-lg text-orange-500"></span>
           </div>
         ) : stories.length === 0 ? (
@@ -407,7 +406,7 @@ const CommunityStories = () => {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg font-bold mb-1">{story.title}</h3>
+                    <h3 className="text-xl font-bold mb-1">{story.title}</h3>
 
                     {/* Story Preview */}
                     <p className="text-sm opacity-70 leading-relaxed italic">
