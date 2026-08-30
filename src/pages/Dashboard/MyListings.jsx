@@ -191,13 +191,13 @@ const MyListings = () => {
                           {req.status}
                         </span>
                         {req.status === "pending" && (
-                          <div className="flex gap-2">
+                          <div className="flex gap-3">
                             <button onClick={() => approveRequest(req._id)}
-                              className="btn btn-xs bg-green-500 hover:bg-green-600 text-white border-none gap-1">
+                              className="btn btn-md bg-green-500 hover:bg-green-600 text-white border-none gap-1">
                               <FaCheck /> Approve
                             </button>
                             <button onClick={() => rejectRequest(req._id)}
-                              className="btn btn-xs bg-red-500 hover:bg-red-600 text-white border-none gap-1">
+                              className="btn btn-md bg-red-500 hover:bg-red-600 text-white border-none gap-1">
                               <FaTimes /> Reject
                             </button>
                           </div>
