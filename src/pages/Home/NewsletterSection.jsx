@@ -15,7 +15,6 @@ const NewsletterSection = () => {
   return (
     <section className="py-20 bg-orange-500 text-white">
       <div className="max-w-2xl mx-auto px-6 text-center">
-        <FaPaw className="text-5xl mx-auto mb-4 opacity-80" />
         <h2 className="text-4xl font-bold mb-4">Stay Updated!</h2>
         <p className="mb-8 opacity-90">Get notified about new pets available for adoption and success stories from our community.</p>
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
