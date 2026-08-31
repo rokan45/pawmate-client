@@ -8,7 +8,7 @@ const questions = [
   {
     id: "livingSpace",
     question: "What's your living situation?",
-    emoji: "🏠",
+    // emoji: "🏠",
     options: [
       { label: "Small apartment", value: "small", species: ["Cat", "Bird", "Hamster", "Fish"], ageMax: 10 },
       { label: "Medium house with small yard", value: "medium", species: ["Dog", "Cat", "Rabbit"], ageMax: 10 },
@@ -18,7 +18,7 @@ const questions = [
   {
     id: "activityLevel",
     question: "How active are you?",
-    emoji: "🏃",
+    // emoji: "🏃",
     options: [
       { label: "Low — I prefer relaxing at home", value: "low", species: ["Cat", "Fish", "Hamster", "Bird"], ageMin: 3 },
       { label: "Medium — I go for walks daily", value: "medium", species: ["Dog", "Cat", "Rabbit"], ageMax: 7 },
@@ -28,7 +28,7 @@ const questions = [
   {
     id: "experience",
     question: "What's your pet ownership experience?",
-    emoji: "⭐",
+    // emoji: "⭐",
     options: [
       { label: "First-time owner", value: "beginner", species: ["Cat", "Fish", "Hamster"], ageMin: 1 },
       { label: "Some experience", value: "intermediate", species: ["Dog", "Cat", "Bird", "Rabbit"], ageMax: 8 },
@@ -38,7 +38,7 @@ const questions = [
   {
     id: "kids",
     question: "Do you have children or other pets?",
-    emoji: "👨‍👩‍👧",
+    // emoji: "👨‍👩‍👧",
     options: [
       { label: "Yes, young children (under 10)", value: "young_kids", species: ["Dog", "Cat", "Rabbit"], ageMin: 1, ageMax: 6 },
       { label: "Yes, older children or other pets", value: "older_kids", species: ["Dog", "Cat", "Bird", "Rabbit"], ageMax: 8 },
@@ -48,7 +48,7 @@ const questions = [
   {
     id: "timeAvailable",
     question: "How much time can you dedicate daily?",
-    emoji: "⏰",
+    // emoji: "⏰",
     options: [
       { label: "Less than 1 hour", value: "low", species: ["Fish", "Hamster", "Cat"], ageMin: 2 },
       { label: "1–3 hours", value: "medium", species: ["Cat", "Bird", "Rabbit"], ageMax: 8 },
